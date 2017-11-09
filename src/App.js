@@ -1,15 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class App extends Component {
+import SchedulePageContainer from './components/SchedulePageContainer';
 
-	render() {
-		return (
-			<div className="App">
-				App
-			</div>
-		);
-	}
-
-}
+const App = () => <SchedulePageContainer/>;
 
 export default App;

@@ -1,0 +1,162 @@
+@import "variables";
+
+.schedule-form {
+    border: 1px solid;
+    margin: 0 auto;
+    max-width: 800px;
+    padding: 20px;
+
+    .row {
+        &:not(:last-child) {
+            margin-bottom: 40px;
+        }
+
+        .sf-label {
+            display: inline-block;
+            line-height: $input-height;
+            text-transform: capitalize;
+        }
+
+        .sf-input {
+            float: right;
+        }
+    }
+
+    .rc-time-picker {
+        width: $input-width;
+
+        .rc-time-picker-input {
+            color: inherit;
+            font-size: 14px;
+            height: $input-height;
+            padding: $input-padding;
+        }
+    }
+
+    .dropdown {
+        width: $input-width;
+
+        &.open,
+        &:active:hover {
+            .dropdown-toggle {
+                background-color: #fff;
+            }
+        }
+    }
+
+    .dropdown-toggle {
+        background-color: #fff;
+        border-radius: 6px;
+        height: $input-height;
+        padding: $input-padding;
+        position: relative;
+        width: 100%;
+
+        &.disabled {
+            &:focus,
+            &:active:focus {
+                outline: none;
+            }
+        }
+
+        &::before {
+            background-color: #ccc;
+            content: '';
+            height: 80%;
+            position: absolute;
+            right: 28px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 1px;
+        }
+
+        &::after {
+            border-left: 4px solid transparent;
+            border-right: 4px solid transparent;
+            border-top: 4px solid;
+            content: '';
+            height: 0;
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 0;
+        }
+
+        .selected-item {
+            text-align: left;
+            width: calc(100% - 26px);
+        }
+    }
+
+    .pull-right {
+        .btn:first-child {
+            margin-right: 20px;
+        }
+    }
+}
+
+.resource {
+    &:not(:last-child) {
+        margin-bottom: 20px;
+    }
+
+    span {
+        display: inline-block;
+        margin-right: 5px;
+        padding-right: 5px;
+        position: relative;
+
+        &:not(:last-child)::after {
+            background-color: #000;
+            content: '';
+            height: 80%;
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 1px;
+        }
+    }
+}
+
+.rc-time-picker-panel {
+    width: $input-width;
+
+    .rc-time-picker-panel-inner {
+        width: 100%;
+
+        .rc-time-picker-panel-input-wrap {
+            padding: $input-padding;
+
+            .rc-time-picker-panel-input {
+                border: none;
+                font-size: 14px;
+                height: $input-height;
+            }
+        }
+
+        .rc-time-picker-panel-select {
+            width: 50%;
+        }
+    }
+}
+
+.schedule-table {
+    padding: 0 20px;
+
+    .st-hours-wrap {
+        position: relative;
+
+        .st-hour {
+            position: absolute;
+        }
+    }
+    .st-task-list {
+        position: relative;
+
+        .st-task {
+            position: absolute;
+        }
+    }
+}

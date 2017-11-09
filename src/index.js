@@ -1,8 +1,23 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
+import { render } from 'react-dom';
+import { Provider } from 'react-redux';
 import registerServiceWorker from './registerServiceWorker';
 
-ReactDOM.render(<App/>, document.getElementById('root'));
+import store from './store/store';
+
+import App from './App';
+
+import 'jquery';
+import 'bootstrap';
+
+import 'bootstrap/dist/css/bootstrap.css';
+import './styles/root.scss';
+
+render(
+	<Provider store={store}>
+		<App/>
+	</Provider>,
+	document.getElementById('root')
+);
 
 registerServiceWorker();
