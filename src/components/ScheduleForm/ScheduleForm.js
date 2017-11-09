@@ -31,8 +31,8 @@ class ScheduleForm extends Component {
 		if (Object.keys(selectedResource).length !== 0) {
 			const { rssTypes, taskTypes } = this.props.types;
 
-			const selectedResourceType = rssTypes.find(type => type.id === selectedResource.typeId);
-			taskList = taskTypes.filter(type => type.rssTypeId === selectedResourceType.id);
+			const selectedResourceType = rssTypes.find((type) => type.id === selectedResource.typeId);
+			taskList = taskTypes.filter((type) => type.rssTypeId === selectedResourceType.id);
 		}
 
 		this.setState({
@@ -45,14 +45,14 @@ class ScheduleForm extends Component {
 	}
 
 	selectResource = (resourceId) => {
-		const selectedResource = this.props.resources.find(rss => rss.id === resourceId);
+		const selectedResource = this.props.resources.find((rss) => rss.id === resourceId);
 		const stateSelectedResource = this.state.selectedResource;
 
 		if (!stateSelectedResource.id || stateSelectedResource.id !== selectedResource.id) {
 			const { rssTypes, taskTypes } = this.props.types;
 
-			const selectedResourceType = rssTypes.find(type => type.id === selectedResource.typeId);
-			const taskList = taskTypes.filter(type => type.rssTypeId === selectedResourceType.id);
+			const selectedResourceType = rssTypes.find((type) => type.id === selectedResource.typeId);
+			const taskList = taskTypes.filter((type) => type.rssTypeId === selectedResourceType.id);
 
 			let { selectedTask } = this.state;
 
@@ -69,7 +69,7 @@ class ScheduleForm extends Component {
 	};
 
 	selectTask = (taskTypeId) => {
-		const selectedTask = this.props.types.taskTypes.find(type => type.id === taskTypeId);
+		const selectedTask = this.props.types.taskTypes.find((type) => type.id === taskTypeId);
 		const stateSelectedTask = this.state.selectedTask;
 
 		if (!stateSelectedTask.id || stateSelectedTask.id !== selectedTask.id) {
@@ -156,7 +156,7 @@ class ScheduleForm extends Component {
 							format="H:mm"
 							showSecond={false}
 							value={moment(task.start_time)}
-							onChange={time => this.changeTaskTime('start', time)}
+							onChange={(time) => this.changeTaskTime('start', time)}
 						/>
 					</ScheduleFormInput>
 					<ScheduleFormInput label="end time">
@@ -164,7 +164,7 @@ class ScheduleForm extends Component {
 							format="H:mm"
 							showSecond={false}
 							value={moment(task.end_time)}
-							onChange={time => this.changeTaskTime('end', time)}
+							onChange={(time) => this.changeTaskTime('end', time)}
 						/>
 					</ScheduleFormInput>
 				</div>
