@@ -26,7 +26,7 @@ const ScheduleTable = ({ types, resources, editTask }) => {
 					{hours.map((hour) => {
 						if (hour % 3 === 0) {
 							return (
-								<div className="st-hour" key={hour} style={{ left: `${hour / 24 * 100}%` }}>
+								<div className="st-hour" key={hour}>
 									{hour}
 								</div>
 							);
@@ -46,21 +46,21 @@ const ScheduleTable = ({ types, resources, editTask }) => {
 									resourceId={id}
 									types={types}
 									editTask={editTask}
-									key={id}
+									key={`${title}-${id}`}
 								/>
 							);
 						} else {
 							return (
-								<div>
+								<div key={`${title}-with-separator`}>
 									<TasksRow
 										title={title}
 										taskList={tasks}
 										resourceId={id}
 										types={types}
 										editTask={editTask}
-										key={id}
+										key={`${title}-${id}`}
 									/>
-									<div className="row separator-row"/>
+									<div className="row separator-row" key={`${title}-separator`}/>
 								</div>
 							);
 						}
