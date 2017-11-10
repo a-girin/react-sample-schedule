@@ -78,39 +78,44 @@ class ScheduleForm extends Component {
 	};
 
 	changeTaskTime = (type, time) => {
-		const task = this.state.task;
+		const { task } = this.state;
+		const { start_time, end_time } = task;
 		const isStart = type === 'start';
 
 		if (!time) {
 			this.setState({
 				task: {
 					...task,
-					[`${type}_time`]: isStart ? new Date().setHours(0, 0, 0, 0) : task.start_time,
+					[`${type}_time`]: isStart ? new Date().setHours(0, 0, 0, 0) : start_time,
 				},
 			});
 		} else {
 			time = time.valueOf();
 
-			const isCompareValid = isStart ? time > task.end_time : time < task.start_time;
+			let updatedTask = {};
 
-			const validTask = isStart ? {
-				...task,
-				end_time: time,
-				start_time: time,
-			} : {
-				...task,
-				end_time: task.start_time,
-			};
+			const isCompareValid = isStart ? (time > end_time) : (time < start_time);
 
-			const invalidTask = isStart ? {
-				...task,
-				start_time: time,
-			} : {
-				...task,
-				end_time: time,
-			};
+			if (isCompareValid) {
+				updatedTask = isStart ? {
+					...task,
+					end_time: time,
+					start_time: time,
+				} : {
+					...task,
+					end_time: start_time,
+				};
+			} else {
+				updatedTask = isStart ? {
+					...task,
+					start_time: time,
+				} : {
+					...task,
+					end_time: time,
+				};
+			}
 
-			this.setState({ task: isCompareValid ? validTask : invalidTask });
+			this.setState({ task: updatedTask });
 		}
 	};
 
@@ -201,7 +206,7 @@ class ScheduleForm extends Component {
 								className={'btn btn-primary' + (!isTaskExist ? ' disabled' : '')}
 								onClick={this.clearTask}
 							>
-								Clear Task
+								Reset
 							</button>
 						</div>
 					</div>

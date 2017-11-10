@@ -44,7 +44,7 @@ export default class SchedulePage extends Component {
 		const { selectedResource, selectedTask, task } = this.state;
 
 		return (
-			<div>
+			<div className="schedule-page">
 				<ScheduleForm
 					types={types}
 					resources={resources}

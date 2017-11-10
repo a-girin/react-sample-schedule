@@ -1,20 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import ScheduleTableItem from './ScheduleTableItem';
+import Task from './Task';
 
-const ScheduleTableRow = ({ title, taskList, resourceId, types, editTask }) => {
+const TasksRow = ({ title, taskList, resourceId, types, editTask }) => {
 	return (
-		<div className="st-task-list-wrap row">
-			<div className="st-title col-md-1">{title}</div>
-			<div className="col-md-11">
+		<div className="st-tasks-row row">
+			<div className="st-row-title col-md-2">
+				<div className="base-title">{title}</div>
+			</div>
+			<div className="st-task-list-wrapper col-md-10">
 				<div className="st-task-list">
 					{taskList.map((task) => {
 						const taskType = types.taskTypes.find((type) => type.id === task.typeId);
 						return (
-							<ScheduleTableItem
+							<Task
 								key={`${resourceId}_${task.id}`}
 								title={taskType.title}
+								type={taskType.type}
 								task={task}
 								resourceId={resourceId}
 								editTask={editTask}
@@ -27,7 +30,7 @@ const ScheduleTableRow = ({ title, taskList, resourceId, types, editTask }) => {
 	);
 };
 
-ScheduleTableRow.propTypes = {
+TasksRow.propTypes = {
 	title: PropTypes.string.isRequired,
 	taskList: PropTypes.arrayOf(PropTypes.object).isRequired,
 	resourceId: PropTypes.number.isRequired,
@@ -35,4 +38,4 @@ ScheduleTableRow.propTypes = {
 	editTask: PropTypes.func.isRequired,
 };
 
-export default ScheduleTableRow;
+export default TasksRow;

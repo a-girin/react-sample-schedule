@@ -11,7 +11,7 @@ import 'jquery';
 import 'bootstrap';
 
 import 'bootstrap/dist/css/bootstrap.css';
-import './styles/root.scss';
+import './assets/styles/root.scss';
 
 render(
 	<Provider store={store}>
