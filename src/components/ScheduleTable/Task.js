@@ -20,7 +20,7 @@ const Task = ({ title, type, task, resourceId, editTask }) => {
 				width: getPercentFromHours(taskDuration),
 			}}
 		>
-			<div className="base-title">{title}</div>
+			<div className="base-title" title={title}>{title}</div>
 		</div>
 	);
 };

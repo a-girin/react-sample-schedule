@@ -214,14 +214,16 @@
 
 			.st-task {
 				@include border(2px);
-				margin-right: 1px;
-				overflow: hidden;
-				padding: 9px 0;
+				cursor: pointer;
+				padding: 9px 5px;
 				position: absolute;
 				text-align: center;
 
 				.base-title {
 					color: #fff;
+					overflow: hidden;
+					text-overflow: ellipsis;
+					white-space: nowrap;
 				}
 
 				&.bagging {
