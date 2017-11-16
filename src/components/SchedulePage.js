@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-
 import ScheduleForm from './ScheduleForm/ScheduleForm';
 import ScheduleTable from './ScheduleTable/ScheduleTable';
 
@@ -14,7 +13,7 @@ export default class SchedulePage extends Component {
 
 	initialState = {
 		selectedResource: {},
-		selectedTask: {},
+		selectedType: {},
 		task: {
 			start_time: new Date().setHours(0, 0, 0, 0),
 			end_time: new Date().setHours(0, 0, 0, 0),
@@ -26,11 +25,11 @@ export default class SchedulePage extends Component {
 
 		const selectedResource = resources.find((resource) => resource.id === resourceId);
 		const task = selectedResource.tasks.find((task) => task.id === taskId);
-		const selectedTask = types.taskTypes.find((type) => type.id === task.typeId);
+		const selectedType = types.taskTypes.find((type) => type.id === task.typeId);
 
 		this.setState({
 			selectedResource,
-			selectedTask,
+			selectedType,
 			task,
 		});
 	};
@@ -41,7 +40,7 @@ export default class SchedulePage extends Component {
 
 	render() {
 		const { types, resources, saveTask } = this.props;
-		const { selectedResource, selectedTask, task } = this.state;
+		const { selectedResource, selectedType, task } = this.state;
 
 		return (
 			<div className="schedule-page">
@@ -49,7 +48,7 @@ export default class SchedulePage extends Component {
 					types={types}
 					resources={resources}
 					selectedResource={selectedResource}
-					selectedTask={selectedTask}
+					selectedType={selectedType}
 					task={task}
 					saveTask={saveTask}
 					clearTask={this.clearTask}

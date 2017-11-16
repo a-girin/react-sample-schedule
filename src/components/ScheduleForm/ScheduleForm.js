@@ -15,7 +15,7 @@ class ScheduleForm extends Component {
 
 		this.state = {
 			selectedResource: props.selectedResource,
-			selectedTask: props.selectedTask,
+			selectedType: props.selectedType,
 			taskList: [],
 			task: props.task,
 			isTaskExist: false,
@@ -23,7 +23,7 @@ class ScheduleForm extends Component {
 	}
 
 	componentWillReceiveProps(props) {
-		const { selectedResource, selectedTask, task } = props;
+		const { selectedResource, selectedType, task } = props;
 		const isTaskExist = typeof task.id !== 'undefined';
 
 		let taskList = null;
@@ -37,7 +37,7 @@ class ScheduleForm extends Component {
 
 		this.setState({
 			selectedResource,
-			selectedTask,
+			selectedType,
 			task,
 			taskList: taskList || this.state.taskList,
 			isTaskExist,
@@ -54,26 +54,26 @@ class ScheduleForm extends Component {
 			const selectedResourceType = rssTypes.find((type) => type.id === selectedResource.typeId);
 			const taskList = taskTypes.filter((type) => type.rssTypeId === selectedResourceType.id);
 
-			let { selectedTask } = this.state;
+			let { selectedType } = this.state;
 
-			if (!selectedTask || selectedTask.rssTypeId !== selectedResourceType.id) {
-				selectedTask = taskList[0];
+			if (!selectedType || selectedType.rssTypeId !== selectedResourceType.id) {
+				selectedType = taskList[0];
 			}
 
 			this.setState({
 				selectedResource,
-				selectedTask,
+				selectedType,
 				taskList,
 			});
 		}
 	};
 
 	selectTask = (taskTypeId) => {
-		const selectedTask = this.props.types.taskTypes.find((type) => type.id === taskTypeId);
-		const stateSelectedTask = this.state.selectedTask;
+		const selectedType = this.props.types.taskTypes.find((type) => type.id === taskTypeId);
+		const stateSelectedTask = this.state.selectedType;
 
-		if (!stateSelectedTask.id || stateSelectedTask.id !== selectedTask.id) {
-			this.setState({ selectedTask });
+		if (!stateSelectedTask.id || stateSelectedTask.id !== selectedType.id) {
+			this.setState({ selectedType });
 		}
 	};
 
@@ -126,11 +126,11 @@ class ScheduleForm extends Component {
 	};
 
 	saveTask = (action = 'create') => {
-		const { task: stateTask, selectedTask, selectedResource } = this.state;
+		const { task: stateTask, selectedType, selectedResource } = this.state;
 
 		const task = {
 			...stateTask,
-			typeId: selectedTask.id,
+			typeId: selectedType.id,
 		};
 
 		const resource = {
@@ -151,7 +151,7 @@ class ScheduleForm extends Component {
 	};
 
 	render() {
-		const { selectedResource, selectedTask, taskList, task, isTaskExist } = this.state;
+		const { selectedResource, selectedType, taskList, task, isTaskExist } = this.state;
 
 		return (
 			<form className="schedule-form" onSubmit={this.handleSubmit}>
@@ -186,7 +186,7 @@ class ScheduleForm extends Component {
 						<ScheduleFormDropdown
 							id="task"
 							items={taskList}
-							selectedItem={selectedTask}
+							selectedItem={selectedType}
 							onClick={this.selectTask}
 							isDisabled={!selectedResource.id}
 						/>
@@ -220,7 +220,7 @@ ScheduleForm.propTypes = {
 	types: PropTypes.object.isRequired,
 	resources: PropTypes.arrayOf(PropTypes.object).isRequired,
 	selectedResource: PropTypes.object,
-	selectedTask: PropTypes.object,
+	selectedType: PropTypes.object,
 	task: PropTypes.object,
 	saveTask: PropTypes.func.isRequired,
 	clearTask: PropTypes.func.isRequired,

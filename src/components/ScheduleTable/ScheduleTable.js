@@ -1,19 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
 import TasksRow from './TasksRow';
+import { getHours } from '../../tools';
 
-const getHours = () => {
-	const hours = [];
-
-	for (let i = 0; i <= 24; i++) {
-		hours.push(i);
-	}
-
-	return hours;
-};
-
-const hours = getHours();
+const HOURS = getHours();
 
 const ScheduleTable = ({ types, resources, editTask }) => {
 	return (
@@ -23,7 +13,7 @@ const ScheduleTable = ({ types, resources, editTask }) => {
 					<div className="base-title">Resource \ Time</div>
 				</div>
 				<div className="st-hours-wrap col-md-10">
-					{hours.map((hour) => {
+					{HOURS.map((hour) => {
 						if (hour % 3 === 0) {
 							return (
 								<div className="st-hour" key={hour}>

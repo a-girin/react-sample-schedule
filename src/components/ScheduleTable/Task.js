@@ -1,19 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
-const getPercentFromHours = (value) => {
-	return `${value / 1000 / 3600 / 24 * 100}%`;
-};
+import { getPercentFromHours, scrollTo } from '../../tools';
 
 const Task = ({ title, type, task, resourceId, editTask }) => {
+
 	const onClick = () => {
 		editTask(resourceId, task.id);
-		document.documentElement.scrollTop = 0;
+
+		scrollTo('.schedule-form');
 	};
 
-	const dayStart = new Date(task.start_time).setHours(0, 0, 0, 0);
-	const taskStart = (dayStart - task.start_time) * -1;
-	const taskDuration = task.end_time - task.start_time;
+	const { start_time, end_time } = task;
+	const dayStart = new Date(start_time).setHours(0, 0, 0, 0);
+	const taskStart = (dayStart - start_time) * -1;
+	const taskDuration = end_time - start_time;
 	const className = type.replace(/_/g, '-');
 
 	return (
@@ -28,6 +28,7 @@ const Task = ({ title, type, task, resourceId, editTask }) => {
 			<div className="base-title" title={title}>{title}</div>
 		</div>
 	);
+
 };
 
 Task.propTypes = {
