@@ -6,6 +6,11 @@ const getPercentFromHours = (value) => {
 };
 
 const Task = ({ title, type, task, resourceId, editTask }) => {
+	const onClick = () => {
+		editTask(resourceId, task.id);
+		document.documentElement.scrollTop = 0;
+	};
+
 	const dayStart = new Date(task.start_time).setHours(0, 0, 0, 0);
 	const taskStart = (dayStart - task.start_time) * -1;
 	const taskDuration = task.end_time - task.start_time;
@@ -14,7 +19,7 @@ const Task = ({ title, type, task, resourceId, editTask }) => {
 	return (
 		<div
 			className={`st-task ${className}`}
-			onClick={() => editTask(resourceId, task.id)}
+			onClick={onClick}
 			style={{
 				left: getPercentFromHours(taskStart),
 				width: getPercentFromHours(taskDuration),
